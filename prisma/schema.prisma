@@ -11,9 +11,8 @@ datasource db {
 }
 
 model Augment {
-  name          String  @id @unique
-  hasCapsuleS   Boolean @default(false)
-  slot          Slot    @relation(references: [name], fields: [slotName])
+  name          String @id @unique
+  slot          Slot   @relation(references: [name], fields: [slotName])
   slotName      String
   bp            Float?
   hp            Float?
