@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+    ports: 
+      - 8080:8080
+
+volumes:
+  dbdata:

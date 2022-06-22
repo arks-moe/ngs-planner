@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Augment {
+  name          String  @id @unique
+  hasCapsuleS   Boolean @default(false)
+  slot          Slot    @relation(references: [name], fields: [slotName])
+  slotName      String
+  bp            Float?
+  hp            Float?
+  pp            Float?
+  melPot        Float?
+  rngPot        Float?
+  tecPot        Float?
+  potFloor      Float?
+  dmgResist     Float?
+  burnResist    Float?
+  freezeResist  Float?
+  shockResist   Float?
+  blindResist   Float?
+  panicResist   Float?
+  poisonResist  Float?
+  painResist    Float?
+  allResist     Float?
+  firePot       Float?
+  icePot        Float?
+  lightningPot  Float?
+  windPot       Float?
+  lightPot      Float?
+  darkPot       Float?
+  lowTempResist Float?
+  daytimePot    Float?
+  nighttimePot  Float?
+  expGrind      Float?
+}
+
+model Slot {
+  name     String    @id @unique
+  augments Augment[]
+}
