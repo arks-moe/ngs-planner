@@ -1,23 +1,24 @@
 import { PrismaClient } from '@prisma/client';
 import data from './data.js';
 const prisma = new PrismaClient();
+
 async function runSeeder() {
 	await Promise.all(
 		data.map(async e => {
 			// Upsert slot prop
 			await prisma.slot.upsert({
-				create: { name: e.slot },
+				create: { name: e.slotName },
 				where: {
-					name: e.slot
+					name: e.slotName
 				},
-				update: { name: e.slot }
+				update: { name: e.slotName }
 			});
 
 			// Insert augment
 			await prisma.augment.upsert({
 				create: {
 					name: e.name,
-					slotName: e.slot,
+					slotName: e.slotName,
 					bp: e.bp,
 					hp: e.hp,
 					pp: e.pp,
