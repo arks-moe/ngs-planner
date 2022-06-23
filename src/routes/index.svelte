@@ -1,20 +1,24 @@
 <script>
 	import icon from '$lib/icon-paths';
 	import ngsEffects from '$lib/effects';
+	import { onMount } from 'svelte';
 	let augment = {
 		name: 'loading...',
 		slot: '...',
 		bp: '...'
 	};
-	fetch('/api/augments')
-		.then(res => res.json())
-		.then(val => {
-			const randomIndex = Math.min(val.length - 1, Math.floor(Math.random() * val.length));
-			const randomAugment = val[randomIndex];
-			const { name, bp, slotName: slot, ...effects } = randomAugment;
-			augment = { name, bp, slot, effects };
-		})
-		.catch(console.error);
+	onMount(() => {
+		fetch('/api/augments')
+			.then(res => res.json())
+			.then(val => {
+				const randomIndex = Math.min(val.length - 1, Math.floor(Math.random() * val.length));
+				const randomAugment = val[randomIndex];
+				const { name, bp, slotName: slot, ...effects } = randomAugment;
+				augment = { name, bp, slot, effects };
+			})
+			.catch(console.error);
+	});
+
 	let effects;
 	$: effects = augment.effects
 		? Object.entries(augment.effects).reduce((previous, current) => {

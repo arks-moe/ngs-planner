@@ -20,8 +20,7 @@ class Effect {
 				})}`;
 			default:
 				return `${value.toLocaleString('en', {
-					style: 'decimal',
-					minimumFractionDigits: 2
+					style: 'decimal'
 				})}`;
 		}
 	}
