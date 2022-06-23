@@ -37,7 +37,7 @@
 			<h4 class="badge badge-outline italic">{augment.slot}</h4>
 			<h4 class="badge badge-outline">+{augment.bp} BP</h4>
 		</div>
-		<ul class="flex gap-2 flex-wrap pt-2 justify-center flex-wrap">
+		<ul class="flex gap-2 flex-wrap pt-2 justify-center">
 			{#each effects as effect}
 				<li class="text-center flex flex-col items-center">
 					<img src={icon.effects[effect.name]} alt={effect.name} />
