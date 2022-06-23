@@ -7720,7 +7720,7 @@ export default [
 	},
 	{
 		name: 'Ragras Soul III',
-		slot: 's',
+		slot: 'Soul',
 		bp: 10,
 		hp: 15,
 		pp: 0,

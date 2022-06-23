@@ -3,14 +3,14 @@ import data from './data.js';
 const prisma = new PrismaClient();
 async function runSeeder() {
 	await Promise.all(
-		data.map(async (e) => {
+		data.map(async e => {
 			// Upsert slot prop
 			await prisma.slot.upsert({
 				create: { name: e.slot },
 				where: {
 					name: e.slot
 				},
-				update: {}
+				update: { name: e.slot }
 			});
 
 			// Insert augment
@@ -46,7 +46,7 @@ async function runSeeder() {
 					expGrind: e.expGrind
 				},
 				where: { name: e.name },
-				update: {}
+				update: { name: e.name }
 			});
 		})
 	);
