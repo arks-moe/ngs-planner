@@ -1,22 +1,22 @@
 class Effect {
-	constructor(name, icon, numericType) {
+	constructor({ key, name, icon, numericType }) {
+		this.key = key;
 		this.name = name;
 		this.icon = icon;
 		this.numericType = numericType;
 	}
 
 	formattedValue(value) {
-		const sign = value >= 0 ? '+' : '-';
+		const sign = value >= 0 ? '+' : '';
 		switch (this.numericType) {
 			case '%':
-				return `${sign}${value.toLocaleString('en', {
+				return `${sign}${(value / 100).toLocaleString('en', {
 					style: 'percent',
 					minimumFractionDigits: 2
 				})}`;
 			case '+':
 				return `${sign}${value.toLocaleString('en', {
-					style: 'decimal',
-					minimumFractionDigits: 2
+					style: 'decimal'
 				})}`;
 			default:
 				return `${value.toLocaleString('en', {
@@ -27,27 +27,142 @@ class Effect {
 	}
 }
 
-export default {
-	allResist: new Effect('allResist', 'assets/icons/effects/allResist.svg', '%'),
-	blindResist: new Effect('blindResist', 'assets/icons/effects/blindResist.svg', '%'),
-	burnResist: new Effect('burnResist', 'assets/icons/effects/burnResist.svg', '%'),
-	darkPot: new Effect('darkPot', 'assets/icons/effects/darkPot.svg', '%'),
-	dmgResist: new Effect('dmgResist', 'assets/icons/effects/dmgResist.svg', '%'),
-	expGrind: new Effect('expGrind', 'assets/icons/effects/expGrind.svg', '~'),
-	firePot: new Effect('firePot', 'assets/icons/effects/firePot.svg', '%'),
-	freezeResist: new Effect('freezeResist', 'assets/icons/effects/freezeResist.svg', '%'),
-	hp: new Effect('hp', 'assets/icons/effects/hp.svg', '+'),
-	icePot: new Effect('icePot', 'assets/icons/effects/icePot.svg', '%'),
-	lightningPot: new Effect('lightningPot', 'assets/icons/effects/lightningPot.svg', '%'),
-	lightPot: new Effect('lightPot', 'assets/icons/effects/lightPot.svg', '%'),
-	melPot: new Effect('melPot', 'assets/icons/effects/melPot.svg', '%'),
-	painResist: new Effect('painResist', 'assets/icons/effects/painResist.svg', '%'),
-	panicResist: new Effect('panicResist', 'assets/icons/effects/panicResist.svg', '%'),
-	poisonResist: new Effect('poisonResist', 'assets/icons/effects/poisonResist.svg', '%'),
-	potFloor: new Effect('potFloor', 'assets/icons/effects/potFloor.svg', '%'),
-	pp: new Effect('pp', 'assets/icons/effects/pp.svg', '+'),
-	rngPot: new Effect('rngPot', 'assets/icons/effects/rngPot.svg', '%'),
-	shockResist: new Effect('shockResist', 'assets/icons/effects/shockResist.svg', '%'),
-	tecPot: new Effect('tecPot', 'assets/icons/effects/tecPot.svg', '%'),
-	windPot: new Effect('windPot', 'assets/icons/effects/windPot.svg', '%')
-};
+const effectObjects = [
+	{
+		key: 'allResist',
+		name: 'allResist',
+		icon: 'assets/icons/effects/allResist.svg',
+		numericType: '%'
+	},
+	{
+		key: 'blindResist',
+		name: 'blindResist',
+		icon: 'assets/icons/effects/blindResist.svg',
+		numericType: '%'
+	},
+	{
+		key: 'burnResist',
+		name: 'burnResist',
+		icon: 'assets/icons/effects/burnResist.svg',
+		numericType: '%'
+	},
+	{
+		key: 'darkPot',
+		name: 'darkPot',
+		icon: 'assets/icons/effects/darkPot.svg',
+		numericType: '%'
+	},
+	{
+		key: 'dmgResist',
+		name: 'dmgResist',
+		icon: 'assets/icons/effects/dmgResist.svg',
+		numericType: '%'
+	},
+	{
+		key: 'expGrind',
+		name: 'expGrind',
+		icon: 'assets/icons/effects/expGrind.svg',
+		numericType: '~'
+	},
+	{
+		key: 'firePot',
+		name: 'firePot',
+		icon: 'assets/icons/effects/firePot.svg',
+		numericType: '%'
+	},
+	{
+		key: 'freezeResist',
+		name: 'freezeResist',
+		icon: 'assets/icons/effects/freezeResist.svg',
+		numericType: '%'
+	},
+	{
+		key: 'hp',
+		name: 'hp',
+		icon: 'assets/icons/effects/hp.svg',
+		numericType: '+'
+	},
+	{
+		key: 'icePot',
+		name: 'icePot',
+		icon: 'assets/icons/effects/icePot.svg',
+		numericType: '%'
+	},
+	{
+		key: 'lightningPot',
+		name: 'lightningPot',
+		icon: 'assets/icons/effects/lightningPot.svg',
+		numericType: '%'
+	},
+	{
+		key: 'lightPot',
+		name: 'lightPot',
+		icon: 'assets/icons/effects/lightPot.svg',
+		numericType: '%'
+	},
+	{
+		key: 'melPot',
+		name: 'melPot',
+		icon: 'assets/icons/effects/melPot.svg',
+		numericType: '%'
+	},
+	{
+		key: 'painResist',
+		name: 'painResist',
+		icon: 'assets/icons/effects/painResist.svg',
+		numericType: '%'
+	},
+	{
+		key: 'panicResist',
+		name: 'panicResist',
+		icon: 'assets/icons/effects/panicResist.svg',
+		numericType: '%'
+	},
+	{
+		key: 'poisonResist',
+		name: 'poisonResist',
+		icon: 'assets/icons/effects/poisonResist.svg',
+		numericType: '%'
+	},
+	{
+		key: 'potFloor',
+		name: 'potFloor',
+		icon: 'assets/icons/effects/potFloor.svg',
+		numericType: '%'
+	},
+	{
+		key: 'pp',
+		name: 'pp',
+		icon: 'assets/icons/effects/pp.svg',
+		numericType: '+'
+	},
+	{
+		key: 'rngPot',
+		name: 'rngPot',
+		icon: 'assets/icons/effects/rngPot.svg',
+		numericType: '%'
+	},
+	{
+		key: 'shockResist',
+		name: 'shockResist',
+		icon: 'assets/icons/effects/shockResist.svg',
+		numericType: '%'
+	},
+	{
+		key: 'tecPot',
+		name: 'tecPot',
+		icon: 'assets/icons/effects/tecPot.svg',
+		numericType: '%'
+	},
+	{
+		key: 'windPot',
+		name: 'windPot',
+		icon: 'assets/icons/effects/windPot.svg',
+		numericType: '%'
+	}
+];
+
+export default effectObjects.reduce((prev, current) => {
+	prev[current.key] = new Effect(current);
+	return prev;
+}, {});
